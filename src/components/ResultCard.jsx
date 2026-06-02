@@ -4,42 +4,57 @@ export default function ResultCard({
   return (
     <div
       className="
-        mt-8
-        bg-gradient-to-r
-        from-blue-50
-        to-indigo-50
-        rounded-3xl
-        p-6
+        bg-white
+        rounded-2xl
         shadow-lg
+        p-6
+        mt-6
       "
     >
-      <div className="text-center">
+      <div className="border-b pb-4 mb-5">
         <h2
           className="
             text-2xl
             font-bold
+            text-gray-800
           "
         >
           {candidate.fullName}
         </h2>
 
-        <p className="text-gray-500">
-          SBD: {candidate.examNumber}
-        </p>
+        <div className="mt-2 text-gray-600">
+          SBD:{" "}
+          <span className="font-semibold">
+            {candidate.examNumber}
+          </span>
+        </div>
+
+        {candidate.schoolName && (
+          <div className="text-gray-600">
+            Trường:{" "}
+            <span className="font-medium">
+              {candidate.schoolName}
+            </span>
+          </div>
+        )}
       </div>
 
       <div
         className="
           grid
-          grid-cols-1
-          sm:grid-cols-3
+          grid-cols-2
+          md:grid-cols-4
           gap-4
-          mt-6
         "
       >
         <ScoreItem
           label="Toán"
           value={candidate.scores?.math}
+        />
+
+        <ScoreItem
+          label="Văn"
+          value={candidate.scores?.literature}
         />
 
         <ScoreItem
@@ -56,17 +71,17 @@ export default function ResultCard({
       <div
         className="
           mt-6
-          bg-white
-          rounded-xl
           p-4
-          text-center
+          bg-gray-50
+          rounded-xl
         "
       >
-        <span className="font-semibold">
+        <span className="font-medium">
           Phòng thi:
+        </span>{" "}
+        <span className="font-bold text-blue-600">
+          {candidate.examRoom || "Chưa cập nhật"}
         </span>
-        {" "}
-        {candidate.examRoom}
       </div>
     </div>
   );
@@ -79,10 +94,9 @@ function ScoreItem({
   return (
     <div
       className="
-        bg-white
-        rounded-2xl
-        p-5
-        shadow
+        bg-blue-50
+        rounded-xl
+        p-4
         text-center
       "
     >
@@ -90,6 +104,7 @@ function ScoreItem({
         className="
           text-gray-500
           text-sm
+          mb-2
         "
       >
         {label}
@@ -97,13 +112,24 @@ function ScoreItem({
 
       <div
         className="
-          text-3xl
+          text-2xl
           font-bold
-          text-blue-600
-          mt-2
         "
       >
-        {value ?? "--"}
+        {value !== null &&
+        value !== undefined ? (
+          value
+        ) : (
+          <span
+            className="
+              text-orange-500
+              text-sm
+              font-semibold
+            "
+          >
+            Đang cập nhật
+          </span>
+        )}
       </div>
     </div>
   );
