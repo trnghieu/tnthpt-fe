@@ -5,7 +5,7 @@ import api from "../api/axios";
 import SearchForm from "../components/SearchForm";
 import ResultCard from "../components/ResultCard";
 import Loading from "../components/Loading";
-
+import banner from "../assets/banner.jpg";
 export default function Home() {
   const [examNumber, setExamNumber] =
     useState("");
@@ -61,17 +61,17 @@ export default function Home() {
 
       <div className="max-w-6xl mx-auto px-4 pt-6">
         <img
-          src="/banner.jpg"
-          alt="Banner"
-          className="
-            w-full
-            h-auto
-            rounded-3xl
-            shadow-2xl
-            border
-            border-white
-          "
-        />
+  src={banner}
+  alt="Banner"
+  className="
+    w-full
+    h-auto
+    rounded-3xl
+    shadow-2xl
+    border
+    border-white
+  "
+/>
       </div>
 
       {/* Nội dung */}
